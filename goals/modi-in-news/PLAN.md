@@ -1,7 +1,7 @@
 # Goal: modi.im — Indian Political News Credibility Tracker
 
 ## Desired Outcome
-A local website `modi.im` that:
+A local website `modi.in` that:
 1. Daily researches Indian political news
 2. Identifies viral/most-viewed articles
 3. Rates each article for credibility (information, author, website)
