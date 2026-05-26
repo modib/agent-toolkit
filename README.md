@@ -10,6 +10,7 @@ Meta-repository tracking Goose AI agent configuration, skills, and goals.
 - `config.yaml` — Goose configuration files
 - `goals/` — Goal-specific documentation and progress tracking
   - `workspace-github-setup/` — Workspace + GitHub workflow setup goal
+  - `modi-im-news/` — modi.im Indian political news credibility tracker goal
 
 ## Setup
 This repo tracks goose's configuration for portability and backup.
