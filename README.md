@@ -4,9 +4,12 @@ Meta-repository tracking Goose AI agent configuration, skills, and goals.
 
 ## Contents
 - `skills/` — Custom skills loaded by goose
+  - `goal/` — `/goal` skill for structured goal-driven autonomous execution
+  - `herdr/` — Herdr terminal multiplexer integration
 - `plugins/` — Integration plugins
 - `config.yaml` — Goose configuration files
-- `goals/` — Active goal plans and progress
+- `goals/` — Goal-specific documentation and progress tracking
+  - `workspace-github-setup/` — Workspace + GitHub workflow setup goal
 
 ## Setup
 This repo tracks goose's configuration for portability and backup.
