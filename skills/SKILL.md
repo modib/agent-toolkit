@@ -80,3 +80,10 @@ The user can check progress anytime by reading:
 - Ask clarifying questions only when truly stuck — prefer documenting assumptions over asking
 - When delegating, partition work strictly so no two delegates touch the same file
 - Use `todoWrite()` to maintain a visible task list at all times
+## Policy: GitHub Repo Creation
+New GitHub repositories MUST always be created as **private**. Use:
+```bash
+gh repo create <name> --private --source=. --push
+```
+
+This is enforced by aliases `git repo-priv` and `gh-repo`.
