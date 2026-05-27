@@ -1,0 +1,5 @@
+# Local goal/plan documents — not for public sharing
+goals/
+
+# Session data — runtime logs, not source
+.opencode/SESSION_SUMMARY.md

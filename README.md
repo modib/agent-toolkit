@@ -1,19 +1,13 @@
-# goose-config
+# agent-toolkit
 
-Meta-repository tracking Goose AI agent configuration, skills, and goals.
+Agent configuration, skills, and tooling integrations for Goose AI.
 
 ## Contents
 - `skills/` — Custom skills loaded by goose
-  - `goal/` — `/goal` skill for structured goal-driven autonomous execution
   - `herdr/` — Herdr terminal multiplexer integration
+  - `goal/` — `/goal` skill for structured goal-driven autonomous execution
 - `plugins/` — Integration plugins
-- `config.yaml` — Goose configuration files
-- `goals/` — Goal-specific documentation and progress tracking
-  - `workspace-github-setup/` — Workspace + GitHub workflow setup goal
-  - `modi-in-news/` — modi.in Indian political news credibility tracker goal
-
-## Setup
-This repo tracks goose's configuration for portability and backup.
+- `config.yaml` — Goose configuration
 
 ## Integrations
 
@@ -29,7 +23,7 @@ Allows goose to report its agent state (working/blocked/idle/done) to [herdr](ht
 
 **Installation:**
 ```bash
-bash ~/Workspace/goose-config/plugins/herdr/install.sh
+bash ~/Workspace/agent-toolkit/plugins/herdr/install.sh
 ```
 
 This will:
