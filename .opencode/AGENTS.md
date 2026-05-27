@@ -7,6 +7,7 @@ Artifacts organized by agent. Currently:
 | Agent | Directory | Contents |
 |-------|-----------|----------|
 | **Goose** | `goose/` | Herdr integration (wrapper, reporter, installer, skill), goal skill, config |
+| **Antigravity** | `antigravity/` | Herdr integration (wrapper, installer) |
 | **Opencode** | `opencode/` | Herdr native plugin |
 
 **Runtime paths:** `~/.agents/`, `~/.config/opencode/plugins/`
@@ -26,6 +27,10 @@ agent-toolkit/
 │   │   ├── goose-wrapper.sh     # Binary wrapper
 │   │   └── install.sh           # Installer script
 │   └── config.yaml              # Goose configuration
+├── antigravity/
+│   └── plugins/herdr/
+│       ├── agy-wrapper.sh       # Antigravity CLI binary wrapper
+│       └── install.sh           # Installer script
 ├── opencode/
 │   └── plugins/
 │       └── herdr-agent-state.js # Native opencode herdr plugin
@@ -71,6 +76,33 @@ bash goose/plugins/herdr/install.sh
 
 ```bash
 mv ~/.local/bin/goose-original ~/.local/bin/goose
+```
+
+---
+
+## Antigravity CLI (agy) — Herdr Integration
+
+### Overview
+
+Allows `agy` to report agent state to herdr. Uses the same `herdr_report.py` as goose.
+
+### Components
+
+| Component | Path in Repo | Runtime Location | Purpose |
+|-----------|-------------|------------------|---------|
+| Python Reporter | `goose/plugins/herdr/herdr_report.py` | `~/.agents/plugins/herdr/` | Unix socket API client (shared) |
+| agy Wrapper | `antigravity/plugins/herdr/agy-wrapper.sh` | Replaces `agy` binary | Intercepts, reports idle/release |
+
+### Installation
+
+```bash
+bash antigravity/plugins/herdr/install.sh
+```
+
+### Uninstallation
+
+```bash
+mv ~/.local/bin/agy-original ~/.local/bin/agy
 ```
 
 ---

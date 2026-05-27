@@ -1,7 +1,8 @@
 // installed by herdr
-// safe to edit. this plugin only activates inside herdr-managed panes.
+// managed by herdr; reinstalling or updating the integration overwrites this file.
+// add custom hooks/plugins beside this file instead of editing it.
 // HERDR_INTEGRATION_ID=opencode
-// HERDR_INTEGRATION_VERSION=1
+// HERDR_INTEGRATION_VERSION=4
 
 import net from "node:net";
 
@@ -13,7 +14,13 @@ function nextReportSeq() {
   return reportSeq;
 }
 
-function reportState(action) {
+function sessionIDFromProperties(properties) {
+  return typeof properties?.sessionID === "string" && properties.sessionID
+    ? properties.sessionID
+    : undefined;
+}
+
+function reportState(action, sessionID) {
   const paneId = process.env.HERDR_PANE_ID;
   const socketPath = process.env.HERDR_SOCKET_PATH;
 
@@ -24,24 +31,26 @@ function reportState(action) {
   const requestId = `${SOURCE}:${Date.now()}:${Math.floor(Math.random() * 1_000_000)
     .toString()
     .padStart(6, "0")}`;
+  const params =
+    action === "release"
+      ? {
+          pane_id: paneId,
+          source: SOURCE,
+          agent: "opencode",
+          seq: nextReportSeq(),
+        }
+      : {
+          pane_id: paneId,
+          source: SOURCE,
+          agent: "opencode",
+          state: action,
+          seq: nextReportSeq(),
+          ...(sessionID ? { agent_session_id: sessionID } : {}),
+        };
   const request = {
     id: requestId,
     method: action === "release" ? "pane.release_agent" : "pane.report_agent",
-    params:
-      action === "release"
-        ? {
-            pane_id: paneId,
-            source: SOURCE,
-            agent: "opencode",
-            seq: nextReportSeq(),
-          }
-        : {
-            pane_id: paneId,
-            source: SOURCE,
-            agent: "opencode",
-            state: action,
-            seq: nextReportSeq(),
-          },
+    params,
   };
 
   return new Promise((resolve) => {
@@ -99,7 +108,6 @@ export const HerdrAgentStatePlugin = async () => {
     return {};
   }
 
-  // Report release when process exits gracefully
   process.on("beforeExit", releaseSync);
   process.on("SIGINT", () => { releaseSync(); process.exit(128 + 2); });
   process.on("SIGTERM", () => { releaseSync(); process.exit(128 + 15); });
@@ -110,26 +118,33 @@ export const HerdrAgentStatePlugin = async () => {
     event: async ({ event }) => {
       const type = event?.type;
       const properties = event?.properties ?? {};
+      const sessionID = sessionIDFromProperties(properties);
 
       switch (type) {
         case "permission.asked":
         case "question.asked":
-          await reportState("blocked");
+          await reportState("blocked", sessionID);
           break;
         case "permission.replied": {
           const reply = properties.reply ?? properties.response;
           if (reply === "reject") {
-            await reportState("idle");
+            await reportState("idle", sessionID);
           } else if (reply === "once" || reply === "always") {
-            await reportState("working");
+            await reportState("working", sessionID);
           }
           break;
         }
         case "question.replied":
-          await reportState("working");
+          await reportState("working", sessionID);
           break;
         case "question.rejected":
-          await reportState("idle");
+          await reportState("idle", sessionID);
+          break;
+        case "session.created":
+        case "session.updated":
+          if (sessionID) {
+            await reportState("idle", sessionID);
+          }
           break;
         case "session.status": {
           const status =
@@ -137,14 +152,14 @@ export const HerdrAgentStatePlugin = async () => {
               ? properties.status
               : properties.status?.type;
           if (status === "busy" || status === "retry") {
-            await reportState("working");
+            await reportState("working", sessionID);
           } else if (status === "idle") {
-            await reportState("idle");
+            await reportState("idle", sessionID);
           }
           break;
         }
         case "session.idle":
-          await reportState("idle");
+          await reportState("idle", sessionID);
           break;
         default:
           break;
