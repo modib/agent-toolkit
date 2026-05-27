@@ -16,7 +16,8 @@ import random
 import fcntl
 import struct
 
-SOURCE = "herdr:goose"
+_AGENT = os.environ.get("HERDR_AGENT_NAME", "goose")
+SOURCE = f"herdr:{_AGENT}"
 _report_seq = int(time.time() * 1000)
 
 def _next_seq():
@@ -105,7 +106,7 @@ def report_state(state):
         params = {
             "pane_id": pane_id,
             "source": SOURCE,
-            "agent": "goose",
+            "agent": _AGENT,
             "seq": _next_seq(),
         }
     else:
@@ -113,7 +114,7 @@ def report_state(state):
         params = {
             "pane_id": pane_id,
             "source": SOURCE,
-            "agent": "goose",
+            "agent": _AGENT,
             "state": state,
             "seq": _next_seq(),
         }

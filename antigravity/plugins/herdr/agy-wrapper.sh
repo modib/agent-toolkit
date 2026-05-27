@@ -48,6 +48,8 @@ fi
 
 REPORT_SCRIPT="$(find_report_script)"
 
+export HERDR_AGENT_NAME=agy
+
 IN_HERDR=0
 if [ "$HERDR_ENV" = "1" ] || [ -n "$HERDR_SOCKET_PATH" ] && [ -n "$HERDR_PANE_ID" ]; then
     IN_HERDR=1
