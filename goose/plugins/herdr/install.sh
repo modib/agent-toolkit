@@ -6,7 +6,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 
 echo "Installing goose-herdr integration..."
 echo "  Repo root: $REPO_ROOT"
@@ -50,10 +50,10 @@ cp "$SCRIPT_DIR/goose-wrapper.sh" "$GOOSE_BIN"
 chmod +x "$GOOSE_BIN"
 
 SKILLS_DIR="$HOME/.agents/skills/herdr"
-if [ -d "$REPO_ROOT/skills/herdr" ]; then
+if [ -d "$REPO_ROOT/goose/skills/herdr" ]; then
     mkdir -p "$SKILLS_DIR"
     echo "  Installing skill to: $SKILLS_DIR/"
-    cp "$REPO_ROOT/skills/herdr/SKILL.md" "$SKILLS_DIR/" 2>/dev/null || true
+    cp "$REPO_ROOT/goose/skills/herdr/SKILL.md" "$SKILLS_DIR/" 2>/dev/null || true
 fi
 
 echo ""
