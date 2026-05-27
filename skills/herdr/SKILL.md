@@ -37,16 +37,34 @@ Report these states at the appropriate times:
 
 ## Required Reporting Flow
 
-1. **At startup**: If herdr is detected, report `working` immediately when you begin processing.
+The wrapper script already reports `idle` at startup (TUI open, awaiting user input).
+You only need to transition between states during work.
+
+1. **When starting work**: When you receive a user prompt and begin processing:
+   - Report `working`
+   ```bash
+   python3 ~/.agents/plugins/herdr-goose/herdr_report.py working
+   ```
 
 2. **Before asking a question**: Before using `question` tool or asking for user input:
-   - Report `blocked` state
+   - Report `blocked`
+   ```bash
+   python3 ~/.agents/plugins/herdr-goose/herdr_report.py blocked
+   ```
 
 3. **After receiving user response**: After the user answers your question or gives permission:
-   - Report `working` state
+   - Report `working`
+   ```bash
+   python3 ~/.agents/plugins/herdr-goose/herdr_report.py working
+   ```
 
 4. **When task is complete**: When you've finished the user's request:
    - Report `idle` (if waiting for next command) OR `done` (if fully complete)
+   ```bash
+   python3 ~/.agents/plugins/herdr-goose/herdr_report.py idle
+   ```
+
+5. **On exit**: The wrapper script automatically reports `release` when the TUI closes (telling herdr the agent is gone) — you don't need to handle this.
 
 ## Check Command
 

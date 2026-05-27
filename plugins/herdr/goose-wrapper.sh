@@ -9,7 +9,7 @@
 # 3. Make executable: chmod +x ~/.local/bin/goose
 #
 
-set -e
+set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -64,14 +64,17 @@ if [ "$HERDR_ENV" = "1" ] || [ -n "$HERDR_SOCKET_PATH" ] && [ -n "$HERDR_PANE_ID
 fi
 
 if [ $IN_HERDR -eq 1 ] && [ -n "$REPORT_SCRIPT" ]; then
-    python3 "$REPORT_SCRIPT" working 2>/dev/null || true
+    python3 "$REPORT_SCRIPT" idle 2>/dev/null || true
 fi
 
 cleanup() {
     if [ $IN_HERDR -eq 1 ] && [ -n "$REPORT_SCRIPT" ]; then
-        python3 "$REPORT_SCRIPT" idle 2>/dev/null || true
+        python3 "$REPORT_SCRIPT" release 2>/dev/null || true
     fi
 }
 trap cleanup EXIT
 
-exec "$GOOSE_REAL" "$@"
+GOOSE_EXIT=0
+"$GOOSE_REAL" "$@" || GOOSE_EXIT=$?
+cleanup
+exit $GOOSE_EXIT

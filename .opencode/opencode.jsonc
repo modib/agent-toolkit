@@ -1,0 +1,5 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "projectRoot": "~/Workspace/goose-config",
+  "name": "goose-config - Herdr Integration & Agent Skills"
+}

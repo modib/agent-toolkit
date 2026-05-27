@@ -1,4 +1,4 @@
-# Goal: modi.im — Indian Political News Credibility Tracker
+# Goal: modi.in — Indian Political News Credibility Tracker
 
 ## Desired Outcome
 A local website `modi.in` that:
@@ -70,6 +70,6 @@ A local website `modi.in` that:
 - **Filter/sort:** Added beyond original scope
 
 ## Files
-- `~/Workspace/modi.im/` — Live project
+- `~/Workspace/modi.in/` — Live project
 - Cron runs at `0 */12 * * *`
-- Access at `http://modi.im:3000`
+- Access at `http://modi.in:3000`
