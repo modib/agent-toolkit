@@ -1,5 +1,4 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "projectRoot": "~/Workspace/agent-toolkit",
-  "name": "agent-toolkit - Herdr Integration & Agent Skills"
+  "name": "agent-toolkit"
 }

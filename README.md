@@ -26,7 +26,7 @@ Allows goose/opencode to report agent state (working/blocked/idle) to [herdr](ht
 
 **For Goose:**
 ```bash
-bash ~/Workspace/agent-toolkit/goose/plugins/herdr/install.sh
+bash goose/plugins/herdr/install.sh
 ```
 
 **For Opencode:**

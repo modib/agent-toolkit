@@ -32,15 +32,6 @@ find_report_script() {
         return 0
     fi
     
-    local repo_dir
-    for repo_dir in "$HOME/Workspace/agent-toolkit" "$HOME/workspace/agent-toolkit"; do
-        script="$repo_dir/goose/plugins/herdr/herdr_report.py"
-        if [ -f "$script" ]; then
-            echo "$script"
-            return 0
-        fi
-    done
-    
     echo ""
     return 1
 }

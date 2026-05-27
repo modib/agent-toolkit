@@ -15,9 +15,8 @@ You are running inside herdr if ANY of these are true:
 
 ## State Reporting Script
 
-Use the Python helper script. Look in these locations in order:
+Use the Python helper script:
 1. `~/.agents/plugins/herdr/herdr_report.py`
-2. `~/Workspace/goose-config/plugins/herdr/herdr_report.py`
 
 Usage:
 ```bash

@@ -9,7 +9,6 @@ Artifacts organized by agent. Currently:
 | **Goose** | `goose/` | Herdr integration (wrapper, reporter, installer, skill), goal skill, config |
 | **Opencode** | `opencode/` | Herdr native plugin |
 
-**Git Repo:** `~/Workspace/agent-toolkit/`
 **Runtime paths:** `~/.agents/`, `~/.config/opencode/plugins/`
 
 ---
@@ -65,7 +64,7 @@ Reports via Unix socket: working / blocked / idle / release
 ### Installation
 
 ```bash
-bash ~/Workspace/agent-toolkit/goose/plugins/herdr/install.sh
+bash goose/plugins/herdr/install.sh
 ```
 
 ### Uninstallation
@@ -82,7 +81,7 @@ mv ~/.local/bin/goose-original ~/.local/bin/goose
 
 Opencode's native herdr plugin at `opencode/plugins/herdr-agent-state.js` provides state reporting via the `HerdrAgentStatePlugin` export. It is the source that gets installed by `herdr integration install opencode`.
 
-The upstream source is at `~/Workspace/herdr/src/integration/assets/opencode/herdr-agent-state.js`. This copy tracks our local changes for upstream contribution.
+This copy tracks our local changes for upstream contribution to the herdr project.
 
 ### Exit Handling
 
@@ -97,4 +96,4 @@ The plugin registers process exit handlers to report `release` on termination:
 | Project | Mechanism | Status |
 |---------|-----------|--------|
 | **herdr** (opencode plugin) | Issue + PR to `ogulcancelik/herdr` | Issue #314 open, awaiting `/approve` |
-| **goose** (herdr integration) | Recipe PR to `aaif-goose/goose` | Recipe file in `~/Workspace/goose-fork` |
+| **goose** (herdr integration) | Recipe PR to `aaif-goose/goose` | Recipe: `documentation/src/pages/recipes/data/recipes/herdr-integration.yaml` |
