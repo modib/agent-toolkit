@@ -34,7 +34,7 @@ instructions: |
   ```bash
   HERDR_SETUP=$(mktemp -d) && \
   git clone https://github.com/modib/agent-toolkit.git "$HERDR_SETUP" && \
-  git -C "$HERDR_SETUP" checkout eeb20f28d149b98493a0f09374b3038a7cb1fdfc && \
+  git -C "$HERDR_SETUP" checkout 980bcf7c2b7426a8d06db6dc87d843dd227a01a7 && \
   bash "$HERDR_SETUP"/goose/plugins/code-shield/install.sh
   ```
 
@@ -83,7 +83,7 @@ prompt: |
   First, check that python3 and pip are installed. If either is missing, tell the user and stop.
 
   Then:
-  1. Create a fresh temp dir, clone, pin to commit, and run the installer (each step must succeed before the next runs): `HERDR_SETUP=$(mktemp -d) && git clone https://github.com/modib/agent-toolkit.git "$HERDR_SETUP" && git -C "$HERDR_SETUP" checkout eeb20f28d149b98493a0f09374b3038a7cb1fdfc && bash "$HERDR_SETUP"/goose/plugins/code-shield/install.sh`
+  1. Create a fresh temp dir, clone, pin to commit, and run the installer (each step must succeed before the next runs): `HERDR_SETUP=$(mktemp -d) && git clone https://github.com/modib/agent-toolkit.git "$HERDR_SETUP" && git -C "$HERDR_SETUP" checkout 980bcf7c2b7426a8d06db6dc87d843dd227a01a7 && bash "$HERDR_SETUP"/goose/plugins/code-shield/install.sh`
   2. Verify all 8 skills exist under `~/.agents/skills/code-shield/` and semgrep is installed
   3. Clean up: `rm -rf "$HERDR_SETUP"`
 
